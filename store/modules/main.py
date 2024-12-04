@@ -5,6 +5,8 @@ import time
 from bintrees import RBTree  # Using RBTree, red-black (self-balancing) tree, as substitute for B-tree (for simplicity).
 import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib
+matplotlib.use('Agg')  # Use a non-GUI backend
 from io import BytesIO
 
 
