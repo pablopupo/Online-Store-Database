@@ -1,0 +1,65 @@
+<html>
+<head>
+    <title>Sorted Products</title>
+</head>
+<style>
+          h1 {
+              text-align: center;
+              background: rgba(76, 175, 80, 0.3);
+          }
+          h2 { text-align:center; }
+          p {
+              text-align: center;
+              height: 20px;
+              background: rgba(119, 136, 153, 0.4);
+          }
+
+          .centered-list {
+              text-align: center;
+              list-style-position: inside; /* Ensures the number aligns with the content */
+              margin: 0 auto; /* Centers the list block itself */
+              padding: 0;
+          }
+          .line {
+            width: 300px;
+            height: 20px; /*sets height of element*/
+            background: cornflowerblue;
+            margin: 0 auto; /* Centers the list block itself */
+             padding: 0;
+          }
+          html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+              width: 100%;
+          }
+
+          body {
+              background-color: lavender;
+          }
+          .container {
+              text-align: center;
+              display: table-cell;
+              vertical-align: middle;
+          }
+          .footer{
+              background-color: rgba(100, 149, 237, 0.9);
+              width: 100%;
+              position: fixed;
+              text-align: center;
+              bottom: 0px;
+          }
+    </style>
+<body>
+    <h1>Sort Products</h1>
+    <p>B-Tree: Sorted in {{ b_time }} seconds.</p>
+    <p>Hash Map: Sorted in {{ h_time }} seconds.</p>
+    <h2>First 100 Sorted Products</h2>
+    <ol class="centered-list">
+        {% for key, value in b_sorted %}
+            <li class="line">ProductID: {{ key }}, Price: ${{ value }}</li><br>
+        {% endfor %}
+    </ol>
+    <div class="footer"><a href="../" style="color: blue; text-decoration: none" >Back to Menu</a></div>
+</body>
+</html>
