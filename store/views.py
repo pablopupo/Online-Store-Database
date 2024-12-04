@@ -1,3 +1,4 @@
+import pandas as pd
 from django.shortcuts import render
 from .modules.main import *
 from .modules.generateddata import *
@@ -152,6 +153,8 @@ def sort(request):
     b_time, b_sorted = test_sort(b_tree_index)
     h_time, h_sorted = test_sort(hash_map_index)
 
+    sorteddata = pd.DataFrame(b_sorted, columns=['ProductID', 'Price'])
+    save_data_to_csv(sorteddata)
     context = {
         "b_sorted": b_sorted[:100],
         "h_sorted": h_sorted,
