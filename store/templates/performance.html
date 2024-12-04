@@ -1,0 +1,55 @@
+<!doctype html>
+{% load custom_filters %}
+<html>
+<head>
+    <title>Performance Results</title>
+</head>
+<style>
+          h1 {
+              text-align: center;
+              background: rgba(76, 175, 80, 0.3);
+          }
+
+          html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+              width: 100%;
+          }
+
+          body {
+              display: table;
+              background-color: lavender;
+          }
+          .container {
+              text-align: center;
+              display: table-cell;
+              vertical-align: middle;
+          }
+          .footer{
+              background-color: rgba(100, 149, 237, 0.9);
+              width: 100%;
+              position: fixed;
+              text-align: center;
+              bottom: 0px;
+          }
+          .container {
+              align-items: center;
+              float: left;
+          }
+          .image{
+              float: left;
+              padding: 29px;
+          }
+    </style>
+<body>
+    <h1>Performance Plots</h1>
+    <div class="imageholder">
+        <div class="image"><img src="data:image/png;base64,{{ barchart|base64encode }}" width="700" height="420"></div>
+        <div class="image"><img src="data:image/png;base64,{{ groupbarchart|base64encode }}" width="700" height="420"></div>
+        <div class="image"><img src="data:image/png;base64,{{ linechart|base64encode }}" width="700" height="420"></div>
+        <div class="image"><img src="data:image/png;base64,{{ piechart|base64encode }}" width="700" height="420"></div>
+    </div>
+    <div class="footer"><a href="../" style="color: blue; text-decoration: none" >Back to Menu</a></div>
+</body>
+</html>
