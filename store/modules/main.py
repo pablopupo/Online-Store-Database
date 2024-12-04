@@ -5,6 +5,8 @@ import time
 from bintrees import RBTree  # Using RBTree, red-black (self-balancing) tree, as substitute for B-tree (for simplicity).
 import matplotlib.pyplot as plt
 import seaborn as sns
+from io import BytesIO
+
 
 # Part 1 of Project: Generating Random Data
 def generate_random_data(num_products=10000, id_range=(100000, 999999), price_range=(10, 1000)):
@@ -26,6 +28,7 @@ def generate_random_data(num_products=10000, id_range=(100000, 999999), price_ra
         'Price': prices
     })
     return data
+
 
 # Part 2: Creating the Data Structures
 
@@ -52,6 +55,7 @@ class BTreeIndex:
     def sort_items(self):
         return list(self.tree.items())
 
+
 # HashMap:
 class HashMapIndex:
     def __init__(self):
@@ -72,9 +76,9 @@ class HashMapIndex:
     def sort_items(self):
         return sorted(self.map.items())
 
+
 # Part 3: Testing and Comparing Efficiency
 def test_search(index, keys_to_search):
-
     def insert(self, key, value):
         self.tree.insert(key, value)
 
@@ -93,6 +97,7 @@ def test_search(index, keys_to_search):
     def sort_items(self):
         return list(self.tree.items())
 
+
 # HashMap:
 class HashMapIndex:
     def __init__(self):
@@ -113,6 +118,7 @@ class HashMapIndex:
     def sort_items(self):
         return sorted(self.map.items())
 
+
 # Part 3: Testing and Comparing Efficiency
 def test_search(index, keys_to_search):
     start_time = time.time()
@@ -121,12 +127,14 @@ def test_search(index, keys_to_search):
     end_time = time.time()
     return end_time - start_time
 
+
 def test_insert(index, items_to_insert):
     start_time = time.time()
     for key, value in items_to_insert:
         index.insert(key, value)
     end_time = time.time()
     return end_time - start_time
+
 
 def test_delete(index, keys_to_delete):
     start_time = time.time()
@@ -140,12 +148,14 @@ def test_delete(index, keys_to_delete):
     end_time = time.time()
     return end_time - start_time
 
+
 def test_insert(index, items_to_insert):
     start_time = time.time()
     for key, value in items_to_insert:
         index.insert(key, value)
     end_time = time.time()
     return end_time - start_time
+
 
 def test_delete(index, keys_to_delete):
     start_time = time.time()
@@ -154,11 +164,13 @@ def test_delete(index, keys_to_delete):
     end_time = time.time()
     return end_time - start_time
 
+
 def test_sort(index):
     start_time = time.time()
     sorted_items = index.sort_items()
     end_time = time.time()
     return end_time - start_time, sorted_items
+
 
 # User Interface: Terminal Menu
 def display_menu():
@@ -213,9 +225,13 @@ def menu(b_tree_index, hash_map_index, results):
             h_time, h_sorted = test_sort(hash_map_index)
             print(f"B-Tree sorted in {b_time:.6f} seconds.")
             print(f"Hash Map sorted in {h_time:.6f} seconds.")
-            # Optionally, display sorted items
-            # print("First 5 sorted items (B-Tree):", b_sorted[:5])
-            # print("First 5 sorted items (Hash Map):", h_sorted[:5])
+            # Display sorted items
+            print("First 5 sorted items (B-Tree):")
+            for key, value in b_sorted[:5]:
+                print("ProductID:", key, "Price:", value)
+            print("First 5 sorted items (Hash Map):")
+            for key, value in h_sorted[:5]:
+                print("ProductID:", key, "Price:", value)
 
         elif choice == '5':
             print("Comparing Performance...")
@@ -242,7 +258,14 @@ def plot_grouped_bar_chart(results):
     plt.ylabel('Time (seconds)')
     plt.legend(title='Data Structure')
     plt.tight_layout()
-    plt.show()
+
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    plt.close()
+    tmpfile.seek(0)
+    file = tmpfile.read()
+    tmpfile.close()
+    return file
 
 
 def plot_speedup_bar_chart(results):
@@ -258,7 +281,13 @@ def plot_speedup_bar_chart(results):
     for index, row in results.iterrows():
         plt.text(index, row['Speedup (%)'] + 1, f"{row['Speedup (%)']}%", ha='center')
 
-    plt.show()
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    plt.close()
+    tmpfile.seek(0)
+    file = tmpfile.read()
+    tmpfile.close()
+    return file
 
 
 def plot_pie_charts(results):
@@ -275,7 +304,14 @@ def plot_pie_charts(results):
     plt.title('Hash Map: Time Distribution per Operation')
 
     plt.tight_layout()
-    plt.show()
+
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    plt.close()
+    tmpfile.seek(0)
+    file = tmpfile.read()
+    tmpfile.close()
+    return file
 
 
 def plot_line_chart(results):
@@ -289,7 +325,15 @@ def plot_line_chart(results):
     plt.ylabel('Time (seconds)')
     plt.legend(title='Data Structure')
     plt.tight_layout()
-    plt.show()
+
+    tmpfile = BytesIO()
+    plt.savefig(tmpfile, format='png')
+    plt.close()
+    tmpfile.seek(0)
+    file = tmpfile.read()
+    tmpfile.close()
+    return file
+
 
 if __name__ == '__main__':
     # Generate data
